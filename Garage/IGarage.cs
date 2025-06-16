@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Garage
 {
-    internal interface IGarage<T> where T : IVehicle
+    internal interface IGarage<T> where T : class, IVehicle
     {
         bool ParkVehicle(T vehicle);
         bool RemoveVehicle(string regNr);
-        T FindVehicle(string regNr);
+        T? FindVehicle(string regNr);
         IEnumerable<T> GetAllVehicles();
         int Capacity { get; }
         int Count { get; }

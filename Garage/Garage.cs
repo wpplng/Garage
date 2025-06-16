@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Garage
 {
-    internal class Garage<T> : IGarage<T>, IEnumerable<T> where T : IVehicle
+    internal class Garage<T> : IGarage<T>, IEnumerable<T> where T : class, IVehicle
     {
-        private T[] _vehicles;
+        private T?[] _vehicles;
         private int _capacity;
         private int _count;
 
@@ -53,9 +53,9 @@ namespace Garage
             // Search for the vehicle with the given registration number
             for (int i = 0; i < _vehicles.Length; i++)
             {
-                if (_vehicles[i] != null && _vehicles[i].RegistrationNumber.Equals(regNr, StringComparison.OrdinalIgnoreCase))
+                if (_vehicles[i] != null && _vehicles[i]!.RegistrationNumber.Equals(regNr, StringComparison.OrdinalIgnoreCase))
                 {
-                    _vehicles[i] = default!; // Remove the vehicle
+                    _vehicles[i] = default; // Remove the vehicle
                     _count--;
                     return true; // Vehicle removed successfully
                 }
@@ -64,7 +64,7 @@ namespace Garage
         }
 
         // FindVehicle method to find a vehicle by its registration number
-        public T FindVehicle(string regNr)
+        public T? FindVehicle(string regNr)
         {
             // Search for the vehicle with the given registration number and return it if found
             return _vehicles.FirstOrDefault(v => v != null && v.RegistrationNumber.Equals(regNr, StringComparison.OrdinalIgnoreCase));
