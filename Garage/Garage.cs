@@ -47,14 +47,28 @@ namespace Garage
             return false; // Garage is full
         }
 
+        // RemoveVehicle method to remove a vehicle by its registration number
         public bool RemoveVehicle(string regNr)
         {
-            throw new NotImplementedException();
+            // Search for the vehicle with the given registration number
+            for (int i = 0; i < _vehicles.Length; i++)
+            {
+                if (_vehicles[i] != null && _vehicles[i].RegistrationNumber.Equals(regNr, StringComparison.OrdinalIgnoreCase))
+                {
+                    _vehicles[i] = default!; // Remove the vehicle
+                    _count--;
+                    return true; // Vehicle removed successfully
+                }
+            }
+            return false; // Vehicle not found
         }
 
+        // FindVehicle method to find a vehicle by its registration number
         public T FindVehicle(string regNr)
         {
-            throw new NotImplementedException();
+            // Search for the vehicle with the given registration number and return it if found
+            return _vehicles.FirstOrDefault(v => v != null && v.RegistrationNumber.Equals(regNr, StringComparison.OrdinalIgnoreCase));
+
         }
 
         public IEnumerable<T> GetAllVehicles()
