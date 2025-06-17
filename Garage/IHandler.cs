@@ -1,0 +1,18 @@
+﻿using Garage.Vehicles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Garage
+{
+    internal interface IHandler
+    {
+        bool AddVehicle(IVehicle vehicle);
+        bool RemoveVehicle(string regNr);
+        IVehicle? FindVehicle(string regNr);
+        IEnumerable<IVehicle> GetAllVehicles();
+        Dictionary<string, int> GetVehicleTypeCounts();
+    }
+}
