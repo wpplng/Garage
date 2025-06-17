@@ -74,7 +74,43 @@ namespace Garage
 
         private void AddVehicleMenu()
         {
-            throw new NotImplementedException();
+            // Display options for adding a vehicle
+            Console.WriteLine("===Add vehicle===");
+            Console.WriteLine("1. Car");
+            Console.WriteLine("2. Motorcycle");
+            Console.WriteLine("3. Boat");
+            Console.WriteLine("4. Bus");
+            Console.WriteLine("5. Airplane");
+            Console.WriteLine("0. Avbryt");
+
+            string choice = GetInput("Select vehicle type:");
+
+            string reg = GetInput("Registraition number:").ToUpper();
+            string color = GetInput("Color:");
+            int wheels = int.Parse(GetInput("Number of wheels:")); // TODO: Add validation for input
+
+            // Create the vehicle based on the user's choice
+            IVehicle? vehicle = choice switch
+            {
+                "1" => new Car(reg, color, wheels, GetInput("Fuel type:")),
+                "2" => new Motorcycle(reg, color, wheels, int.Parse(GetInput("Cylinder volyme:"))),
+                "3" => new Boat(reg, color, wheels, int.Parse(GetInput("Length (m):"))),
+                "4" => new Bus(reg, color, wheels, int.Parse(GetInput("Number of seats:"))),
+                "5" => new Airplane(reg, color, wheels, int.Parse(GetInput("Number of engines:"))),
+                "0" => null,
+                _ => null
+            };
+
+            // Check if the vehicle was created successfully
+            if (vehicle == null)
+            {
+                ShowMessage("Canceled, or invalid choice.");
+                return;
+            }
+
+            // Attempt to add the vehicle to the garage
+            bool added = _handler.AddVehicle(vehicle);
+            ShowMessage(added ? "Vehicle added!" : "The vehicle could not be added.");
         }
 
         // Show prompt and read input from the user
