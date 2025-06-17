@@ -69,7 +69,27 @@ namespace Garage
 
         private void SearchVehicleMenu()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("===Search Vehicles===");
+            Console.WriteLine("Enter search criteria (press Enter to skip any criteria):");
+
+            // Prompt the user for search criteria
+            string? color = GetInput("Color:");
+            string? wheelsInput = GetInput("Number of wheels:");
+            string? type = GetInput("Type of vehicle (car, bus, boat, motorcycle, airplane):");
+            string? reg = GetInput("Registration number:");
+
+            int? wheels = int.TryParse(wheelsInput, out int w) ? w : null;
+
+            // Perform the search using the handler
+            var results = _handler.SearchVehicle(
+                string.IsNullOrWhiteSpace(color) ? null : color,
+                wheels,
+                string.IsNullOrWhiteSpace(type) ? null : type,
+                string.IsNullOrWhiteSpace(reg) ? null : reg);
+
+            // Display the search results
+            Console.WriteLine("Search results:");
+            ShowVehicles(results);
         }
 
         private void AddVehicleMenu()
