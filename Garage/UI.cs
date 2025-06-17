@@ -24,13 +24,13 @@ namespace Garage
             {
                 Console.Clear();
                 Console.WriteLine("===GARAGE===");
-                Console.WriteLine("1. Lista alla fordon i garaget");
-                Console.WriteLine("2. Lägg till fordon");
-                Console.WriteLine("3. Ta bort fordon");
-                Console.WriteLine("4. Sök fordon");
-                Console.WriteLine("5. Visa antal fordon per typ");
-                Console.WriteLine("0. Avsluta");
-                Console.Write("Välj ett alternativ: ");
+                Console.WriteLine("1. List of all vehicles in the garage");
+                Console.WriteLine("2. Add vehicle");
+                Console.WriteLine("3. Remove vehicle");
+                Console.WriteLine("4. Search vehicle");
+                Console.WriteLine("5. Show number of vehicles per type");
+                Console.WriteLine("0. Terminate");
+                Console.Write("Select an option: ");
 
                 string choice = Console.ReadLine() ?? string.Empty;
                 Console.Clear();
@@ -44,9 +44,9 @@ namespace Garage
                         AddVehicleMenu();
                         break;
                     case "3":
-                        string regToRemove = GetInput("Ange registreringsnummer att ta bort:");
+                        string regToRemove = GetInput("Enter registration number to remove:");
                         bool removed = _handler.RemoveVehicle(regToRemove);
-                        ShowMessage(removed ? "Fordon borttaget!" : "Fordon hittades inte.");
+                        ShowMessage(removed ? "Vehicle removed!" : "Vehicle could not be found.");
                         break;
                     case "4":
                         SearchVehicleMenu();
@@ -56,13 +56,13 @@ namespace Garage
                             Console.WriteLine($"{pair.Key}: {pair.Value}");
                         break;
                     case "0":
-                        ShowMessage("Avslutar...");
+                        ShowMessage("Terminating...");
                         return;
                     default:
-                        ShowMessage("Ogiltigt val, försök igen.");
+                        ShowMessage("Invalid choice, please try again.");
                         break;
                 }
-                Console.WriteLine("Tryck på valfri tangent för att fortsätta...");
+                Console.WriteLine("Press any key to continue...");
                 Console.ReadKey(true); // Wait for user input before clearing the console again
             }
         }
@@ -100,7 +100,7 @@ namespace Garage
 
             if (!vehicles.Any())
             {
-                Console.WriteLine("Inga fordon hittades.");
+                Console.WriteLine("No vehicles found.");
             }
         }
     }
