@@ -71,19 +71,20 @@ namespace Garage
 
         }
 
-        public IEnumerable<T> GetAllVehicles()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<T> GetAllVehicles() => _vehicles.Where(v => v != null).Cast<T>(); // Return all non-null vehicles in the garage
+
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            foreach (var vehicle in _vehicles)
+            {
+                if (vehicle != null)
+                {
+                    yield return vehicle; // Yield each non-null vehicle
+                }
+            }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
