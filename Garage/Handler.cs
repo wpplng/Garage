@@ -36,5 +36,20 @@ namespace Garage
                 .GroupBy(v => v.GetType().Name)
                 .ToDictionary(g => g.Key, g => g.Count());
         }
+
+        // Serches for vehicles in the garage based on optional criteria such as color, number of wheels, type, and registration number
+        public IEnumerable<IVehicle> SearchVehicle(
+           string? color = null,
+           int? numberOfWheels = null,
+           string? type = null,
+           string? regNr = null )
+        {
+            return _garage.GetAllVehicles().Where(v =>
+                (color == null || v.Color.Equals(color, StringComparison.OrdinalIgnoreCase)) &&
+                (numberOfWheels == null || v.NumberOfWheels == numberOfWheels) &&
+                (type == null || v.GetType().Name.Equals(type, StringComparison.OrdinalIgnoreCase)) &&
+                (regNr == null || v.RegistrationNumber.Equals(regNr, StringComparison.OrdinalIgnoreCase))
+            );
+        }
     }
 }
