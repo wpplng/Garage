@@ -107,16 +107,16 @@ namespace Garage
 
             string reg = GetInput("Registraition number:").ToUpper();
             string color = GetInput("Color:");
-            int wheels = int.Parse(GetInput("Number of wheels:")); // TODO: Add validation for input
+            int wheels = GetIntInput("Number of wheels:");
 
             // Create the vehicle based on the user's choice
             IVehicle? vehicle = choice switch
             {
                 "1" => new Car(reg, color, wheels, GetInput("Fuel type:")),
-                "2" => new Motorcycle(reg, color, wheels, int.Parse(GetInput("Cylinder volyme:"))),
-                "3" => new Boat(reg, color, wheels, int.Parse(GetInput("Length (m):"))),
-                "4" => new Bus(reg, color, wheels, int.Parse(GetInput("Number of seats:"))),
-                "5" => new Airplane(reg, color, wheels, int.Parse(GetInput("Number of engines:"))),
+                "2" => new Motorcycle(reg, color, wheels, GetIntInput("Cylinder volyme:")),
+                "3" => new Boat(reg, color, wheels, GetIntInput("Length (m):")),
+                "4" => new Bus(reg, color, wheels, GetIntInput("Number of seats:")),
+                "5" => new Airplane(reg, color, wheels, GetIntInput("Number of engines:")),
                 "0" => null,
                 _ => null
             };
@@ -138,6 +138,19 @@ namespace Garage
         {
             Console.Write(prompt + " ");
             return Console.ReadLine() ?? string.Empty;
+        }
+
+        // Get an integer input from the user with validation
+        private int GetIntInput(string prompt)
+        {
+            while (true)
+            {
+                string input = GetInput(prompt);
+                if (int.TryParse(input, out int result))
+                    return result;
+
+                ShowMessage("Invalid input. Please enter a number.");
+            }
         }
 
         // Show a message to the user
