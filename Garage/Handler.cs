@@ -11,33 +11,30 @@ namespace Garage
     {
         private IGarage<IVehicle> _garage;
 
+        // Constructor that initializes the Handler with a garage instance
         public Handler(IGarage<IVehicle> garage)
         {
             _garage = garage ?? throw new ArgumentNullException(nameof(garage), "Garage cannot be null");
         }
-        public bool AddVehicle(IVehicle vehicle)
-        {
-            throw new NotImplementedException();
-        }
 
-        public IVehicle? FindVehicle(string regNr)
-        {
-            throw new NotImplementedException();
-        }
+        // Adds a vehicle to the garage - parks the vehicle if there's space and no duplicate registration number
+        public bool AddVehicle(IVehicle vehicle) => _garage.ParkVehicle(vehicle);
 
-        public IEnumerable<IVehicle> GetAllVehicles()
-        {
-            throw new NotImplementedException();
-        }
+        // Removes a vehicle from the garage by its registration number
+        public bool RemoveVehicle(string regNr) => _garage.RemoveVehicle(regNr);
 
+        // Finds a vehicle in the garage by its registration number
+        public IVehicle? FindVehicle(string regNr) => _garage.FindVehicle(regNr);
+
+        // Retrieves all vehicles currently in the garage
+        public IEnumerable<IVehicle> GetAllVehicles() => _garage.GetAllVehicles();
+
+        // Gets a count of each type of vehicle in the garage, returning a dictionary with vehicle type names as keys and their counts as values
         public Dictionary<string, int> GetVehicleTypeCounts()
         {
-            throw new NotImplementedException();
-        }
-
-        public bool RemoveVehicle(string regNr)
-        {
-            throw new NotImplementedException();
+            return _garage.GetAllVehicles()
+                .GroupBy(v => v.GetType().Name)
+                .ToDictionary(g => g.Key, g => g.Count());
         }
     }
 }
