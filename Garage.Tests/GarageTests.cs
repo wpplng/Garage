@@ -65,5 +65,20 @@ namespace Garage.Tests
             Assert.True(removed);
             Assert.Empty(garage.GetAllVehicles());
         }
+
+        [Fact]
+        public void RemoveVehicle_RemovingNonExistingVehicle_ReturnsFalse()
+        {
+            // Arrange
+            var garage = CreateGarageWithCapacity(2);
+            garage.ParkVehicle(new Car("ABC321", "Red", 4, "Diesel"));
+            
+            // Act
+            var removed = garage.RemoveVehicle("XYZ789");
+            
+            // Assert
+            Assert.False(removed);
+            Assert.Single(garage.GetAllVehicles());
+        }
     }
 }
