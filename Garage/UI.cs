@@ -126,6 +126,12 @@ namespace Garage
                 _ => null
             };
 
+            AddVehicle(vehicle);
+        }
+
+        // Adds a vehicle to the garage using the handler
+        private void AddVehicle(IVehicle? vehicle)
+        {
             // Check if the vehicle was created successfully
             if (vehicle == null)
             {
