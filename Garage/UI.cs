@@ -111,14 +111,14 @@ namespace Garage
                 return;
             }
 
-            string reg = GetInput("Registraition number:").ToUpper();
-            string color = GetInput("Color:");
+            string reg = GetRequiredInput("Registraition number:").ToUpper();
+            string color = GetRequiredInput("Color:");
             int wheels = GetIntInput("Number of wheels:");
 
             // Create the vehicle based on the user's choice
             IVehicle? vehicle = choice switch
             {
-                "1" => new Car(reg, color, wheels, GetInput("Fuel type (e.g. Diesel, Gasoline):")),
+                "1" => new Car(reg, color, wheels, GetRequiredInput("Fuel type (e.g. Diesel, Gasoline):")),
                 "2" => new Motorcycle(reg, color, wheels, GetIntInput("Cylinder volyme (cc):")),
                 "3" => new Boat(reg, color, wheels, GetIntInput("Length (meters):")),
                 "4" => new Bus(reg, color, wheels, GetIntInput("Number of seats:")),
@@ -155,6 +155,20 @@ namespace Garage
             Console.Write(prompt + " ");
             return Console.ReadLine() ?? string.Empty;
         }
+
+        // Get an input from the user and ensure it's not empty
+        private string GetRequiredInput(string prompt)
+        {
+            while (true)
+            {
+                string input = GetInput(prompt);
+                if (!string.IsNullOrWhiteSpace(input))
+                    return input;
+
+                ShowMessage("This field is required. Please enter a value.");
+            }
+        }
+
 
         // Get an integer input from the user with validation
         private int GetIntInput(string prompt)
