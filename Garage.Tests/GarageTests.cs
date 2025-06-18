@@ -46,7 +46,7 @@ namespace Garage.Tests
 
             // Act
             var result = garage.ParkVehicle(new Car("ABC321", "Blue", 4, "Gasoline"));
-            
+
             // Assert
             Assert.Equal(ParkingResult.DuplicateRegistration, result);
         }
@@ -57,10 +57,10 @@ namespace Garage.Tests
             // Arrange
             var garage = CreateGarageWithCapacity(2);
             garage.ParkVehicle(new Car("ABC321", "Red", 4, "Diesel"));
-            
+
             // Act
             var removed = garage.RemoveVehicle("ABC321");
-            
+
             // Assert
             Assert.True(removed);
             Assert.Empty(garage.GetAllVehicles());
@@ -72,10 +72,10 @@ namespace Garage.Tests
             // Arrange
             var garage = CreateGarageWithCapacity(2);
             garage.ParkVehicle(new Car("ABC321", "Red", 4, "Diesel"));
-            
+
             // Act
             var removed = garage.RemoveVehicle("XYZ789");
-            
+
             // Assert
             Assert.False(removed);
             Assert.Single(garage.GetAllVehicles());
@@ -88,10 +88,10 @@ namespace Garage.Tests
             var garage = CreateGarageWithCapacity(1);
             var vehicle = new Car("ABC321", "Red", 4, "Diesel");
             garage.ParkVehicle(vehicle);
-            
+
             // Act
             var foundVehicle = garage.FindVehicle("abc321");
-            
+
             // Assert
             Assert.NotNull(foundVehicle);
             Assert.Equal("ABC321", foundVehicle!.RegistrationNumber);
@@ -103,10 +103,10 @@ namespace Garage.Tests
             // Arrange
             var garage = CreateGarageWithCapacity(1);
             garage.ParkVehicle(new Car("ABC321", "Red", 4, "Diesel"));
-            
+
             // Act
             var foundVehicle = garage.FindVehicle("XYZ789");
-            
+
             // Assert
             Assert.Null(foundVehicle);
         }
@@ -116,19 +116,37 @@ namespace Garage.Tests
         {
             // Arrange
             var garage = CreateGarageWithCapacity(3);
-
-            var car= new Car("ABC321", "Red", 4, "Diesel");
+            var car = new Car("ABC321", "Red", 4, "Diesel");
             var mc = new Motorcycle("XYZ789", "Blue", 2, 600);
             garage.ParkVehicle(car);
             garage.ParkVehicle(mc);
 
             // Act
             var vehicles = garage.GetAllVehicles().ToList();
-            
+
             // Assert
             Assert.Equal(2, vehicles.Count);
             Assert.Contains(car, vehicles);
             Assert.Contains(mc, vehicles);
+        }
+
+        [Fact]
+        public void Foreach_Iteration_WorksOverParkedVehicles()
+        {
+            // Arrange
+            var garage = CreateGarageWithCapacity(2);
+            garage.ParkVehicle(new Car("ABC321", "Red", 4, "Diesel"));
+            garage.ParkVehicle(new Motorcycle("XYZ789", "Blue", 2, 600));
+
+            // Act
+            var vehicles = new List<IVehicle>();
+            foreach (var vehicle in garage)
+            {
+                vehicles.Add(vehicle);
+            }
+
+            // Assert
+            Assert.Equal(2, vehicles.Count);
         }
     }
 }
