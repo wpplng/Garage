@@ -18,7 +18,7 @@ namespace Garage
         }
 
         // Adds a vehicle to the garage - parks the vehicle if there's space and no duplicate registration number
-        public bool AddVehicle(IVehicle vehicle) => _garage.ParkVehicle(vehicle);
+        public ParkingResult AddVehicle(IVehicle vehicle) => _garage.ParkVehicle(vehicle);
 
         // Removes a vehicle from the garage by its registration number
         public bool RemoveVehicle(string regNr) => _garage.RemoveVehicle(regNr);

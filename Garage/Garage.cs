@@ -26,13 +26,17 @@ namespace Garage
         public int Count => _count;
 
         // ParkVehicle method to add a vehicle to the garage
-        public bool ParkVehicle(T vehicle)
+        public ParkingResult ParkVehicle(T vehicle)
         {
-            // Check if the garage is full, the vehicle is null, or if a vehicle with the same registration number already exists
-            if (_count >= _capacity || vehicle == null || _vehicles.Any(v => v?.RegistrationNumber == vehicle.RegistrationNumber))
-            {
-                return false; // Garage is full or vehicle already exists
-            }
+            // Validate the vehicle before parking
+            if (vehicle == null)
+                return ParkingResult.InvalidVehicle;
+
+            if (_vehicles.Any(v => v?.RegistrationNumber == vehicle.RegistrationNumber))
+                return ParkingResult.DuplicateRegistration;
+
+            if (_count >= _capacity)
+                return ParkingResult.GarageFull;
 
             // Check for an empty slot in the garage
             for (int i = 0; i < _capacity; i++)
@@ -41,10 +45,10 @@ namespace Garage
                 {
                     _vehicles[i] = vehicle;
                     _count++;
-                    return true;
+                    return ParkingResult.Success;
                 }
             }
-            return false; // Garage is full
+            return ParkingResult.GarageFull; // Garage is full
         }
 
         // RemoveVehicle method to remove a vehicle by its registration number

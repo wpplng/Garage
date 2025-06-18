@@ -9,7 +9,7 @@ namespace Garage
 {
     internal interface IGarage<T> where T : class, IVehicle
     {
-        bool ParkVehicle(T vehicle);
+        ParkingResult ParkVehicle(T vehicle);
         bool RemoveVehicle(string regNr);
         T? FindVehicle(string regNr);
         IEnumerable<T> GetAllVehicles();

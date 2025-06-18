@@ -9,7 +9,7 @@ namespace Garage
 {
     internal interface IHandler
     {
-        bool AddVehicle(IVehicle vehicle);
+        ParkingResult AddVehicle(IVehicle vehicle);
         bool RemoveVehicle(string regNr);
         IVehicle? FindVehicle(string regNr);
         IEnumerable<IVehicle> GetAllVehicles();

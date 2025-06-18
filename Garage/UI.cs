@@ -101,9 +101,15 @@ namespace Garage
             Console.WriteLine("3. Boat");
             Console.WriteLine("4. Bus");
             Console.WriteLine("5. Airplane");
-            Console.WriteLine("0. Avbryt");
+            Console.WriteLine("0. Cancel");
 
             string choice = GetInput("Select vehicle type:");
+
+            if (choice == "0")
+            {
+                ShowMessage("Canceled.");
+                return;
+            }
 
             string reg = GetInput("Registraition number:").ToUpper();
             string color = GetInput("Color:");
@@ -112,25 +118,35 @@ namespace Garage
             // Create the vehicle based on the user's choice
             IVehicle? vehicle = choice switch
             {
-                "1" => new Car(reg, color, wheels, GetInput("Fuel type:")),
-                "2" => new Motorcycle(reg, color, wheels, GetIntInput("Cylinder volyme:")),
-                "3" => new Boat(reg, color, wheels, GetIntInput("Length (m):")),
+                "1" => new Car(reg, color, wheels, GetInput("Fuel type (e.g. Diesel, Gasoline):")),
+                "2" => new Motorcycle(reg, color, wheels, GetIntInput("Cylinder volyme (cc):")),
+                "3" => new Boat(reg, color, wheels, GetIntInput("Length (meters):")),
                 "4" => new Bus(reg, color, wheels, GetIntInput("Number of seats:")),
                 "5" => new Airplane(reg, color, wheels, GetIntInput("Number of engines:")),
-                "0" => null,
                 _ => null
             };
 
             // Check if the vehicle was created successfully
             if (vehicle == null)
             {
-                ShowMessage("Canceled, or invalid choice.");
+                ShowMessage("Invalid vehicle type selected.");
                 return;
             }
 
-            // Attempt to add the vehicle to the garage
-            bool added = _handler.AddVehicle(vehicle);
-            ShowMessage(added ? "Vehicle added!" : "The vehicle could not be added.");
+            // Add the vehicle to the garage using the handler
+            ParkingResult result = _handler.AddVehicle(vehicle);
+
+            // Provide feedback based on the result of adding the vehicle
+            string feedback = result switch
+            {
+                ParkingResult.Success => "Vehicle added successfully!",
+                ParkingResult.GarageFull => "Garage is full. Cannot add vehicle.",
+                ParkingResult.DuplicateRegistration => "A vehicle with this registration number already exists.",
+                ParkingResult.InvalidVehicle => "Invalid vehicle.",
+                _ => "Unknown error."
+            };
+
+            ShowMessage(feedback);
         }
 
         // Show prompt and read input from the user
