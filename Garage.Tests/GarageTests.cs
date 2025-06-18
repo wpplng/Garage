@@ -110,5 +110,25 @@ namespace Garage.Tests
             // Assert
             Assert.Null(foundVehicle);
         }
+
+        [Fact]
+        public void GetAllVehicles_ReturnsOnlyParkedVehicles()
+        {
+            // Arrange
+            var garage = CreateGarageWithCapacity(3);
+
+            var car= new Car("ABC321", "Red", 4, "Diesel");
+            var mc = new Motorcycle("XYZ789", "Blue", 2, 600);
+            garage.ParkVehicle(car);
+            garage.ParkVehicle(mc);
+
+            // Act
+            var vehicles = garage.GetAllVehicles().ToList();
+            
+            // Assert
+            Assert.Equal(2, vehicles.Count);
+            Assert.Contains(car, vehicles);
+            Assert.Contains(mc, vehicles);
+        }
     }
 }
