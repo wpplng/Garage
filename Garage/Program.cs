@@ -1,2 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Garage;
+
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        var manager = new Manager();
+        manager.Run();
+    }
+}
