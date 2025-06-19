@@ -23,9 +23,6 @@ namespace Garage
         // Removes a vehicle from the garage by its registration number
         public bool RemoveVehicle(string regNr) => _garage.RemoveVehicle(regNr);
 
-        // Finds a vehicle in the garage by its registration number
-        public IVehicle? FindVehicle(string regNr) => _garage.FindVehicle(regNr);
-
         // Retrieves all vehicles currently in the garage
         public IEnumerable<IVehicle> GetAllVehicles() => _garage.GetAllVehicles();
 

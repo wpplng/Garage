@@ -11,7 +11,6 @@ namespace Garage
     {
         ParkingResult AddVehicle(IVehicle vehicle);
         bool RemoveVehicle(string regNr);
-        IVehicle? FindVehicle(string regNr);
         IEnumerable<IVehicle> GetAllVehicles();
         Dictionary<string, int> GetVehicleTypeCounts();
         IEnumerable<IVehicle> SearchVehicle(string? color = null, int? numberOfWheels = null, string? type = null, string? regNr = null);

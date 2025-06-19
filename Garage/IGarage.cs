@@ -11,7 +11,6 @@ namespace Garage
     {
         ParkingResult ParkVehicle(T vehicle);
         bool RemoveVehicle(string regNr);
-        T? FindVehicle(string regNr);
         IEnumerable<T> GetAllVehicles();
         int Capacity { get; }
         int Count { get; }

@@ -69,14 +69,6 @@ namespace Garage
             return false; // Vehicle not found
         }
 
-        // FindVehicle method to find a vehicle by its registration number
-        public T? FindVehicle(string regNr)
-        {
-            // Search for the vehicle with the given registration number and return it if found
-            return _vehicles.FirstOrDefault(v => v != null && v.RegistrationNumber.Equals(regNr, StringComparison.OrdinalIgnoreCase));
-
-        }
-
         public IEnumerable<T> GetAllVehicles() => _vehicles.Where(v => v != null).Cast<T>(); // Return all non-null vehicles in the garage
 
 

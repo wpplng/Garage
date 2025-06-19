@@ -82,36 +82,6 @@ namespace Garage.Tests
         }
 
         [Fact]
-        public void FindVehicle_ReturnsCorrectVehicle_IgnoringCase()
-        {
-            // Arrange
-            var garage = CreateGarageWithCapacity(1);
-            var vehicle = new Car("ABC321", "Red", 4, "Diesel");
-            garage.ParkVehicle(vehicle);
-
-            // Act
-            var foundVehicle = garage.FindVehicle("abc321");
-
-            // Assert
-            Assert.NotNull(foundVehicle);
-            Assert.Equal("ABC321", foundVehicle!.RegistrationNumber);
-        }
-
-        [Fact]
-        public void FindVehicle_ReturnsNull_WhenVehicleNotFound()
-        {
-            // Arrange
-            var garage = CreateGarageWithCapacity(1);
-            garage.ParkVehicle(new Car("ABC321", "Red", 4, "Diesel"));
-
-            // Act
-            var foundVehicle = garage.FindVehicle("XYZ789");
-
-            // Assert
-            Assert.Null(foundVehicle);
-        }
-
-        [Fact]
         public void GetAllVehicles_ReturnsOnlyParkedVehicles()
         {
             // Arrange
