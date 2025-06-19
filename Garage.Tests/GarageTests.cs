@@ -1,4 +1,5 @@
-﻿using Garage.Vehicles;
+﻿using Garage.GarageLogic;
+using Garage.Vehicles;
 using System.Diagnostics.Metrics;
 
 namespace Garage.Tests

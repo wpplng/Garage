@@ -5,8 +5,6 @@ VisualStudioVersion = 17.14.36203.30
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garage", "Garage\Garage.csproj", "{FB5B0BED-43DF-4D4B-9069-C64FB2CD3647}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garage.Tests", "Garage.Tests\Garage.Tests.csproj", "{9EB4122A-9B80-49F3-82FB-2593102C7796}"
 EndProject
 Global
@@ -26,9 +24,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{9EB4122A-9B80-49F3-82FB-2593102C7796} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0F927FA7-C6AE-40AE-BAD1-ED2DD5235DA1}

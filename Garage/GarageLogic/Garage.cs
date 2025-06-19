@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 [assembly: InternalsVisibleTo("Garage.Tests")] // Allow unit tests to access internal members of this assembly
 
-namespace Garage
+namespace Garage.GarageLogic
 {
     internal class Garage<T> : IGarage<T>, IEnumerable<T> where T : class, IVehicle
     {

@@ -1,11 +1,12 @@
-﻿using Garage.Vehicles;
+﻿using Garage.GarageLogic;
+using Garage.Vehicles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Garage
+namespace Garage.ConsoleUI
 {
     internal class UI : IUI
     {

@@ -1,4 +1,6 @@
-﻿using Garage.Vehicles;
+﻿using Garage.ConsoleUI;
+using Garage.GarageLogic;
+using Garage.Vehicles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
