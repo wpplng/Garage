@@ -118,7 +118,7 @@ namespace Garage
             // Create the vehicle based on the user's choice
             IVehicle? vehicle = choice switch
             {
-                "1" => new Car(reg, color, wheels, GetRequiredInput("Fuel type (e.g. Diesel, Gasoline):")),
+                "1" => new Car(reg, color, wheels, GetFuelTypeInput()),
                 "2" => new Motorcycle(reg, color, wheels, GetIntInput("Cylinder volyme (cc):")),
                 "3" => new Boat(reg, color, wheels, GetIntInput("Length (meters):")),
                 "4" => new Bus(reg, color, wheels, GetIntInput("Number of seats:")),
@@ -128,6 +128,27 @@ namespace Garage
 
             AddVehicle(vehicle);
         }
+
+        private FuelType GetFuelTypeInput()
+        {
+            var values = Enum.GetValues<FuelType>().ToList();
+
+            Console.WriteLine("Select fuel type:");
+            for (int i = 0; i < values.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {values[i]}");
+            }
+
+            while (true)
+            {
+                int choice = GetIntInput("Enter number:") - 1;
+                if (choice >= 0 && choice < values.Count)
+                    return values[choice];
+
+                ShowMessage("Invalid choice. Try again.");
+            }
+        }
+
 
         // Adds a vehicle to the garage using the handler
         private void AddVehicle(IVehicle? vehicle)

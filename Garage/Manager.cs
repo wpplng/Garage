@@ -33,7 +33,7 @@ namespace Garage
         // Populates the garage with mock vehicles for demonstration purposes
         private void PopulateGarageWithMockVehicles(IHandler handler)
         {
-            handler.AddVehicle(new Car("ABC123", "Red", 4, "Diesel"));
+            handler.AddVehicle(new Car("ABC123", "Red", 4, FuelType.Gasoline));
             handler.AddVehicle(new Motorcycle("XYZ987", "Black", 2, 600));
             handler.AddVehicle(new Boat("BOAT01", "Blue", 0, 7));
             handler.AddVehicle(new Bus("BUS99", "Yellow", 6, 45));

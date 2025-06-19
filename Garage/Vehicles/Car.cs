@@ -8,8 +8,8 @@ namespace Garage.Vehicles
 {
     internal class Car : Vehicle
     {
-        public string FuelType { get; } // Type of fuel used by the car (e.g., Gasoline, Diesel, Electric)
-        public Car(string regNr, string color, int numberOfWheels, string fuelType) : base(regNr, color, numberOfWheels)
+        public FuelType FuelType { get; } // Type of fuel used by the car (e.g., Gasoline, Diesel, Electric)
+        public Car(string regNr, string color, int numberOfWheels, FuelType fuelType) : base(regNr, color, numberOfWheels)
         {
             FuelType = fuelType;
         }

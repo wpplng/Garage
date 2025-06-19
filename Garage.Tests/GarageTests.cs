@@ -13,7 +13,7 @@ namespace Garage.Tests
         {
             // Arrange
             var garage = CreateGarageWithCapacity(1);
-            var vehicle = new Car("ABC321", "Red", 4, "Diesel");
+            var vehicle = new Car("ABC321", "Red", 4, FuelType.Diesel);
 
             // Act
             var result = garage.ParkVehicle(vehicle);
@@ -28,10 +28,10 @@ namespace Garage.Tests
         {
             // Arrange
             var garage = CreateGarageWithCapacity(1);
-            garage.ParkVehicle(new Car("ABC321", "Red", 4, "Diesel"));
+            garage.ParkVehicle(new Car("ABC321", "Red", 4, FuelType.Diesel));
 
             // Act
-            var result = garage.ParkVehicle(new Car("DEF456", "Blue", 4, "Diesel"));
+            var result = garage.ParkVehicle(new Car("DEF456", "Blue", 4, FuelType.Diesel));
 
             // Assert
             Assert.Equal(ParkingResult.GarageFull, result);
@@ -42,10 +42,10 @@ namespace Garage.Tests
         {
             // Arrange
             var garage = CreateGarageWithCapacity(2);
-            garage.ParkVehicle(new Car("ABC321", "Red", 4, "Diesel"));
+            garage.ParkVehicle(new Car("ABC321", "Red", 4, FuelType.Diesel));
 
             // Act
-            var result = garage.ParkVehicle(new Car("ABC321", "Blue", 4, "Gasoline"));
+            var result = garage.ParkVehicle(new Car("ABC321", "Blue", 4, FuelType.Gasoline));
 
             // Assert
             Assert.Equal(ParkingResult.DuplicateRegistration, result);
@@ -56,7 +56,7 @@ namespace Garage.Tests
         {
             // Arrange
             var garage = CreateGarageWithCapacity(2);
-            garage.ParkVehicle(new Car("ABC321", "Red", 4, "Diesel"));
+            garage.ParkVehicle(new Car("ABC321", "Red", 4, FuelType.Diesel));
 
             // Act
             var removed = garage.RemoveVehicle("ABC321");
@@ -71,7 +71,7 @@ namespace Garage.Tests
         {
             // Arrange
             var garage = CreateGarageWithCapacity(2);
-            garage.ParkVehicle(new Car("ABC321", "Red", 4, "Diesel"));
+            garage.ParkVehicle(new Car("ABC321", "Red", 4, FuelType.Diesel));
 
             // Act
             var removed = garage.RemoveVehicle("XYZ789");
@@ -86,7 +86,7 @@ namespace Garage.Tests
         {
             // Arrange
             var garage = CreateGarageWithCapacity(3);
-            var car = new Car("ABC321", "Red", 4, "Diesel");
+            var car = new Car("ABC321", "Red", 4, FuelType.Diesel);
             var mc = new Motorcycle("XYZ789", "Blue", 2, 600);
             garage.ParkVehicle(car);
             garage.ParkVehicle(mc);
@@ -105,7 +105,7 @@ namespace Garage.Tests
         {
             // Arrange
             var garage = CreateGarageWithCapacity(2);
-            garage.ParkVehicle(new Car("ABC321", "Red", 4, "Diesel"));
+            garage.ParkVehicle(new Car("ABC321", "Red", 4, FuelType.Diesel));
             garage.ParkVehicle(new Motorcycle("XYZ789", "Blue", 2, 600));
 
             // Act
